@@ -1,0 +1,8 @@
+.input-field {
+	margin-right: 5px;
+}
+
+.addUserForm {
+	display: flex;
+	flex-direction: column;
+}
