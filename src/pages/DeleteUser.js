@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import './DeleteUser.css'
-
+import { Typography, Button } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 const DeleteUser = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -33,15 +33,35 @@ const DeleteUser = () => {
 
 	return (
 		<>
-			<h1>Удаление пользователя {id}</h1>
+			<Typography variant="h5" sx={{ my: 3 }}>
+				Удаление пользователя
+			</Typography>
 			{userRem && (
 				<>
-					<p>{userRem.name}</p>
-					<p>{userRem.email}</p>
-					<button onClick={cancelReturnAllUser}>Отмена</button>
-					<button onClick={() => removeReturnAllUser(userRem.id)}>
+					<Typography variant="h8" sx={{ ml: 1 }}>
+						{userRem.name}
+					</Typography>
+					<Typography variant="h8" sx={{ ml: 1 }}>
+						{userRem.email}
+					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={cancelReturnAllUser}
+						size="small"
+						sx={{ ml: 2 }}
+					>
+						Отмена
+					</Button>
+					<Button
+						variant="outlined"
+						size="small"
+						sx={{ ml: 2 }}
+						startIcon={<DeleteIcon />}
+						onClick={() => removeReturnAllUser(userRem.id)}
+					>
 						Удалить
-					</button>
+					</Button>
 				</>
 			)}
 		</>

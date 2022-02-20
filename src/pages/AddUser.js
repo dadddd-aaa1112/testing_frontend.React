@@ -1,7 +1,15 @@
 import React, { createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import './AddUser.css'
+import {
+	Button,
+	MenuItem,
+	Select,
+	TextField,
+	Typography,
+	FormControl,
+} from '@mui/material'
+
 const Adduser = () => {
 	const navigate = useNavigate()
 
@@ -25,26 +33,31 @@ const Adduser = () => {
 	const addSelect = createRef()
 
 	return (
-		<>
-			<h1>Добавление пользователя</h1>
-			<div className="addUserForm">
-				<div className="input-field">
-					ФИО
-					<input type="text" ref={addName} />
-					<label className="input-field">
-						Выберите ваш город
-						<select className="input-field" ref={addSelect}>
-							<option value="1">Краснодар</option>
-							<option value="2">Москва</option>
-							<option value="3">Санкт-Петербург</option>
-						</select>
-					</label>
-				</div>
-				<button className="input-field" onClick={addUser}>
-					Добавить пользователя
-				</button>
-			</div>
-		</>
+		<FormControl>
+			<Typography variant="h5" sx={{ my: 3 }}>
+				Добавление пользователя
+			</Typography>
+
+			<TextField variant="standard" type="text" ref={addName} label="ФИО" />
+			<Select
+				sx={{ mt: 3 }}
+				className="input-field"
+				label="	Выберите ваш город"
+				ref={addSelect}
+			>
+				<MenuItem value="1">Краснодар</MenuItem>
+				<MenuItem value="2">Москва</MenuItem>
+				<MenuItem value="3">Санкт-Петербург</MenuItem>
+			</Select>
+			<Button
+				sx={{ mt: 3 }}
+				variant="contained"
+				color="success"
+				onClick={addUser}
+			>
+				Добавить пользователя
+			</Button>
+		</FormControl>
 	)
 }
 

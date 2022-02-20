@@ -1,7 +1,10 @@
 import React, { useState, useEffect, createRef } from 'react'
-import './ListUser.css'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
+import { Button, Grid, Typography, TextField, FormControl } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import ArrowForward from '@mui/icons-material/ArrowForward'
+import ArrowBack from '@mui/icons-material/ArrowBack'
 
 const ListUsers = () => {
 	const [users, setUsers] = useState([])
@@ -28,8 +31,16 @@ const ListUsers = () => {
 
 	return (
 		<div>
-			<h1>Список всех пользователей</h1>
-			<button onClick={() => navigate('/add')}>Добавить пользователя</button>
+			<Typography variant="h5" sx={{ my: 3 }}>
+				Список всех пользователей
+			</Typography>
+			<Button
+				variant="contained"
+				color="success"
+				onClick={() => navigate('/add')}
+			>
+				Добавить пользователя
+			</Button>
 			<input
 				type="text"
 				onChange={() => searchUser()}
@@ -47,7 +58,7 @@ const ListUsers = () => {
 				</thead>
 
 				<tbody>
-					<div className="listUser">
+					<>
 						<tr>
 							{users.map((user) => (
 								<>
@@ -55,23 +66,35 @@ const ListUsers = () => {
 										<td>{user.name}</td>
 										<td>{user.email}</td>
 										<td>
-											<button>Редактировать</button>
+											<Button
+												size="small"
+												sx={{ ml: 2 }}
+												variant="contained"
+												color="primary"
+											>
+												Редактировать
+											</Button>
 										</td>
 									</Link>
 									<td>
-										<button onClick={() => navigate(`/edit/${user.id}/delete`)}>
+										<Button
+											variant="outlined"
+											size="small"
+											sx={{ ml: 2 }}
+											startIcon={<DeleteIcon />}
+											onClick={() => navigate(`/edit/${user.id}/delete`)}
+										>
 											Удалить
-										</button>
+										</Button>
 									</td>
 								</>
 							))}
 						</tr>
-					</div>
+					</>
 				</tbody>
 			</table>
-
-			<button>Назад</button>
-			<button>Вперед</button>
+			<Button startIcon={<ArrowBack />}></Button>
+			<Button startIcon={<ArrowForward />}></Button>
 		</div>
 	)
 }

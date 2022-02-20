@@ -1,5 +1,5 @@
+import { Button, Grid, Typography, TextField, FormControl } from '@mui/material'
 import React from 'react'
-import './Auth.css'
 import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
@@ -10,31 +10,42 @@ const Auth = () => {
 	}
 
 	return (
-		<div className="login-page">
-			<div className="form">
-				<form className="register-form">
-					<h1>Вход</h1>
+		<FormControl sx={{ ml: 50, mt: 20 }}>
+			<Typography variant="h4" sx={{ ml: 7 }}>
+				Вход
+			</Typography>
 
-					<label class="register-form-button" for="login">
-						Логин{' '}
-					</label>
-					<input class="register-form-button" type="text" id="login" />
+			<Typography variant="h7" sx={{ mt: 2 }}>
+				Логин
+			</Typography>
 
-					<label class="register-form-button" for="password">
-						Пароль{' '}
-					</label>
-					<input class="register-form-button" type="password" id="password" />
+			<TextField
+				variant="filled"
+				size="small"
+				variant="outlined"
+				type="text"
+				id="login"
+			/>
 
-					<button
-						class="register-form-button"
-						type="success"
-						onClick={loginHandler}
-					>
-						Войти
-					</button>
-				</form>
-			</div>
-		</div>
+			<Typography variant="h7" sx={{ mt: 2 }}>
+				Пароль
+			</Typography>
+			<TextField
+				size="small"
+				variant="outlined"
+				type="password"
+				id="password"
+			/>
+
+			<Button
+				sx={{ color: 'inherit', mt: 2 }}
+				variant="outlined"
+				onClick={loginHandler}
+				type="submit"
+			>
+				Войти
+			</Button>
+		</FormControl>
 	)
 }
 

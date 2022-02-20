@@ -1,8 +1,7 @@
 import React, { useState, useEffect, createRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import './ItemUser.css'
 import axios from 'axios'
-
+import { Button, Grid, Typography, TextField, FormControl } from '@mui/material'
 const ItemUser = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -47,17 +46,46 @@ const ItemUser = () => {
 
 	return (
 		<>
-			<h1>Редактирование пользователя</h1>
-			<div className="itemUser">
+			<Typography variant="h5" sx={{ my: 5 }}>
+				Редактирование пользователя
+			</Typography>
+			<>
 				{user && (
 					<>
-						<input type="text" defaultValue={user.name} ref={nameInput} />
-						<input type="text" defaultValue={user.email} ref={emailInput} />
+						<TextField
+							size="small"
+							variant="outlined"
+							type="text"
+							defaultValue={user.name}
+							ref={nameInput}
+						/>
+						<TextField
+							size="small"
+							variant="outlined"
+							type="text"
+							defaultValue={user.email}
+							ref={emailInput}
+							sx={{ ml: 2 }}
+						/>
 					</>
 				)}
-				<button onClick={cancelReturnAllUser}>Отмена</button>
-				<button onClick={applyReturnAllUser}>Сохранить</button>
-			</div>
+				<Button
+					variant="contained"
+					color="primary"
+					sx={{ ml: 2 }}
+					onClick={cancelReturnAllUser}
+				>
+					Отмена
+				</Button>
+				<Button
+					variant="contained"
+					color="success"
+					onClick={applyReturnAllUser}
+					sx={{ ml: 2 }}
+				>
+					Сохранить
+				</Button>
+			</>
 		</>
 	)
 }
