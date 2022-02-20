@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import React, { createRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -8,12 +8,16 @@ import {
 	TextField,
 	Typography,
 	FormControl,
+	InputLabel,
 } from '@mui/material'
 
 const Adduser = () => {
 	const navigate = useNavigate()
 
 	const addUser = () => {
+		console.log('name', addName.current.value)
+		console.log('email', addSelect.current.value)
+
 		const addData = {
 			id: new Date().toString(),
 			name: addName.current.value,
@@ -32,23 +36,39 @@ const Adduser = () => {
 	const addName = createRef()
 	const addSelect = createRef()
 
+	const [city, setCity] = useState('')
+
+	const handleChange = (event) => {
+		setCity(event.target.value)
+	}
+
 	return (
 		<FormControl>
 			<Typography variant="h5" sx={{ my: 3 }}>
 				Добавление пользователя
 			</Typography>
 
-			<TextField variant="standard" type="text" ref={addName} label="ФИО" />
-			<Select
-				sx={{ mt: 3 }}
-				className="input-field"
-				label="	Выберите ваш город"
-				ref={addSelect}
-			>
-				<MenuItem value="1">Краснодар</MenuItem>
-				<MenuItem value="2">Москва</MenuItem>
-				<MenuItem value="3">Санкт-Петербург</MenuItem>
-			</Select>
+			<TextField
+				variant="standard"
+				type="text"
+				inputRef={addName}
+				label="ФИО"
+			/>
+			<FormControl sx={{ mt: 3 }} fullWidth>
+				<InputLabel id="city-label"> </InputLabel>
+				Выберите ваш город
+				<Select
+					id="city-label"
+					value={city}
+					onChange={handleChange}
+					label="Выберите ваш город"
+					inputRef={addSelect}
+				>
+					<MenuItem value={'Краснодар'}>Краснодар</MenuItem>
+					<MenuItem value={'Москва'}>Москва</MenuItem>
+					<MenuItem value={'Санкт-Петербург'}>Санкт-Петербург</MenuItem>
+				</Select>
+			</FormControl>
 			<Button
 				sx={{ mt: 3 }}
 				variant="contained"

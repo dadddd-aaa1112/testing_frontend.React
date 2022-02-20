@@ -25,6 +25,9 @@ const ItemUser = () => {
 		const inputNameValue = nameInput.current.value
 		const inputEmailValue = emailInput.current.value
 
+		console.log(inputNameValue, 'inputNameValue')
+		console.log(inputEmailValue, 'inputEmailValue')
+
 		const url = `https://jsonplaceholder.typicode.com/users/${id}`
 
 		axios
@@ -57,14 +60,14 @@ const ItemUser = () => {
 							variant="outlined"
 							type="text"
 							defaultValue={user.name}
-							ref={nameInput}
+							inputRef={nameInput}
 						/>
 						<TextField
 							size="small"
 							variant="outlined"
 							type="text"
 							defaultValue={user.email}
-							ref={emailInput}
+							inputRef={emailInput}
 							sx={{ ml: 2 }}
 						/>
 					</>
