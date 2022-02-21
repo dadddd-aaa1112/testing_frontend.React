@@ -23,14 +23,6 @@ const ListUsers = () => {
 
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		const baseUrl = 'https://jsonplaceholder.typicode.com/users'
-		axios.get(baseUrl).then((resp) => {
-			const allUsers = resp.data
-			setUsers(allUsers)
-		})
-	}, [setUsers])
-
 	const searchUser = (e) => {
 		e.preventDefault()
 		const searchData = e.target.value
@@ -39,6 +31,14 @@ const ListUsers = () => {
 		)
 		setUsers(res)
 	}
+
+	useEffect(() => {
+		const baseUrl = 'https://jsonplaceholder.typicode.com/users'
+		axios.get(baseUrl).then((resp) => {
+			const allUsers = resp.data
+			setUsers(allUsers)
+		})
+	}, [setUsers])
 
 	const inputRef = createRef()
 

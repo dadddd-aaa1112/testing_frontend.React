@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react'
+import React, { createRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -42,6 +42,17 @@ const Adduser = () => {
 		setCity(event.target.value)
 	}
 
+	const [allCity, setAllCity] = useState([])
+
+	useEffect(() => {
+		const baseUrl = 'https://htmlweb.ru/json/geo/city_list?country=Russia'
+
+		axios.get(baseUrl).then((resp) => {
+			const allCity = resp.data.items
+			setAllCity(allCity)
+		})
+	}, [setAllCity])
+
 	return (
 		<FormControl>
 			<Typography variant="h5" sx={{ my: 3 }}>
@@ -54,6 +65,7 @@ const Adduser = () => {
 				inputRef={addName}
 				label="ФИО"
 			/>
+
 			<FormControl sx={{ mt: 3 }} fullWidth>
 				<InputLabel id="city-label"> </InputLabel>
 				Выберите ваш город
@@ -64,11 +76,14 @@ const Adduser = () => {
 					label="Выберите ваш город"
 					inputRef={addSelect}
 				>
-					<MenuItem value={'Краснодар'}>Краснодар</MenuItem>
-					<MenuItem value={'Москва'}>Москва</MenuItem>
-					<MenuItem value={'Санкт-Петербург'}>Санкт-Петербург</MenuItem>
+					{allCity.map((citys) => (
+						<MenuItem key={city.id} value={citys.name}>
+							{citys.name}
+						</MenuItem>
+					))}
 				</Select>
 			</FormControl>
+
 			<Button
 				sx={{ mt: 3 }}
 				variant="contained"
